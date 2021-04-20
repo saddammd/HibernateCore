@@ -1,5 +1,6 @@
 package com.hibernate.spring.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -34,6 +35,29 @@ class Customer_dao implements Customer_dao_interface {
 		 List<Customer> result = query.getResultList();
 		
 		return result;
+	}
+
+	@Override
+	public void saveCustomer(Customer customer) {
+		Session session = sessionFactory.getCurrentSession();
+	    session.saveOrUpdate(customer);
+		
+	}
+
+	@Override
+	public Customer getCustomer(Integer id) {
+		
+		Session session = sessionFactory.getCurrentSession();
+		Customer cust = session.get(Customer.class, id);
+		
+		return cust;
+	}
+
+	@Override
+	public void deleteCustomer(Customer customer) {
+		
+		Session session = sessionFactory.getCurrentSession();
+		session.delete(customer);
 	}
 
 	
